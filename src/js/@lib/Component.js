@@ -18,7 +18,7 @@ export class Component extends HTMLElement {
     const template = this.template();
     if (!template) return;
 
-    this.removeAllChildNodes();
+    this.removeAllChild();
     this.$container.append(createElement(template));
 
     this.initElement();
@@ -54,13 +54,13 @@ export class Component extends HTMLElement {
     this.$container.classList.add('hide');
   }
 
-  removeAllChildNodes() {
-    const removeAllChildNodes = (parent) => {
+  removeAllChild() {
+    const removeAllChild = (parent) => {
       while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
       }
     };
 
-    removeAllChildNodes(this.$container);
+    removeAllChild(this.$container);
   }
 }
