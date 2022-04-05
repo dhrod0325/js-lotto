@@ -1,14 +1,14 @@
 export class LottoNumber {
-  values = [];
+  numbers = [];
   bonus;
 
-  constructor({ values, bonus }) {
-    this.values = values;
+  constructor(numbers, bonus) {
+    this.numbers = numbers;
     this.bonus = bonus;
   }
 
-  getValues() {
-    const result = [...this.values];
+  getNumbersAndBonus() {
+    const result = [...this.numbers];
     this.bonus && result.push(+this.bonus);
 
     return result;

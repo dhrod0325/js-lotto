@@ -2,6 +2,7 @@ import { validator } from '../../src/js/domain/Validator.js';
 import { lotto } from '../../src/js/domain/Lotto.js';
 import { ERROR } from '../../src/js/Constant.js';
 import { LottoResult } from '../../src/js/domain/LottoResult';
+import { LottoNumber } from '../../src/js/domain/LottoNumber';
 
 describe('Lotto 테스트', () => {
   beforeEach(() => {
@@ -87,37 +88,29 @@ describe('Lotto 번호 생성 테스트', () => {
   });
 });
 
-describe('Lotto 당첨번호 테스트', () => {
+describe('Lotto 당첨 테스트', () => {
+  const lottoNumber = new LottoNumber([1, 2, 3, 4, 5, 6], 7);
+
   it('1등테스트', () => {
-    const lottoResult = new LottoResult({
-      values: [1, 2, 3, 4, 5, 6],
-      bonus: 7,
-    }, [
-      [1, 2, 3, 4, 5, 6, 7],
-    ]);
+    const lottoResult = new LottoResult(lottoNumber,
+      [[1, 2, 3, 4, 5, 6, 7]],
+    );
 
     expect(lottoResult.winnerPrice).to.eq(200000000);
   });
 
   it('2등테스트', () => {
-    const lottoResult = new LottoResult({
-      values: [1, 2, 3, 4, 5, 6],
-      bonus: 7,
-    }, [
-      [1, 2, 3, 4, 5, 10, 7],
-    ]);
+    const lottoResult = new LottoResult(lottoNumber,
+      [[1, 2, 3, 4, 5, 8, 7]],
+    );
 
     expect(lottoResult.winnerPrice).to.eq(30000000);
   });
 
   it('1,2등테스트', () => {
-    const lottoResult = new LottoResult({
-      values: [1, 2, 3, 4, 5, 6],
-      bonus: 7,
-    }, [
-      [1, 2, 3, 4, 5, 6, 7],
-      [1, 2, 3, 4, 5, 10, 7],
-    ]);
+    const lottoResult = new LottoResult(lottoNumber,
+      [[1, 2, 3, 4, 5, 6, 7], [1, 2, 3, 4, 5, 8, 7]],
+    );
 
     expect(lottoResult.winnerPrice).to.eq(230000000);
   });

@@ -30,16 +30,17 @@ export class LottoResult {
   }
 
   calcWinnerCounts(lotto) {
-    const lottoNumbers = this.lottoNumber.values;
-    const bonusNumber = this.lottoNumber.bonus;
-    const winningCount = lottoNumbers.filter(number => lotto.includes(number)).length;
+    const { numbers, bonus } = this.lottoNumber;
+
+    console.log(numbers, bonus);
+    const winningCount = numbers.filter(number => lotto.includes(number)).length;
 
     if (winningCount === 3) {
       this.winnerCounts[0]++;
     } else if (winningCount === 4) {
       this.winnerCounts[1]++;
     } else if (winningCount === 5) {
-      if (lotto.includes(bonusNumber)) {
+      if (lotto.includes(bonus)) {
         this.winnerCounts[3]++;
       } else {
         this.winnerCounts[2]++;

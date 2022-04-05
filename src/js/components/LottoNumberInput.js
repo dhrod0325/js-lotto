@@ -74,17 +74,17 @@ class LottoNumberInput extends BaseElement {
     eventHandler.on_구매금액입력(() => {
       this.show();
     });
-    
+
     eventHandler.on_다시시작(() => {
       this.reset();
     });
 
     this.$openModalButton.addEventListener('click', () => {
-      const lottoNumber = new LottoNumber(this.getLottoNumbers());
-      const lottoNumbers = lottoNumber.getValues();
+      const lottoNumber = new LottoNumber(this.getInputNumbers(), this.getInputBonus());
+      const numbersAndBonus = lottoNumber.getNumbersAndBonus();
 
       try {
-        validator.validateLottoNumber(lottoNumbers);
+        validator.validateLottoNumber(numbersAndBonus);
       } catch (e) {
         return alert(e.message);
       }
@@ -93,14 +93,14 @@ class LottoNumberInput extends BaseElement {
     });
   }
 
-  getLottoNumbers() {
-    const values = Array.from(this.$lottoNumbers)
+  getInputNumbers() {
+    return Array.from(this.$lottoNumbers)
       .filter((elem) => +elem.value > 0)
       .map((elem) => +elem.value);
+  }
 
-    const bonus = this.$bonusNumber.value;
-
-    return { values, bonus };
+  getInputBonus() {
+    return this.$bonusNumber.value;
   }
 }
 
