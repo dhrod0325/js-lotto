@@ -2,6 +2,53 @@ import { BaseElement } from '../@lib/BaseElement.js';
 import { LottoResult } from '../domain/LottoResult.js';
 import { eventHandler } from '../domain/EventHandler.js';
 
+class LottoResultModal extends BaseElement {
+  lottoList;
+  lottoNumber;
+
+  $closeButton;
+  $replayButton;
+  $resultTable;
+
+  mounted() {
+    this.hide();
+  }
+
+  template() {
+    return template(new LottoResult(this.lottoNumber, this.lottoList));
+  }
+
+  initElement() {
+    this.$closeButton = this.$container.querySelector('.modal-close');
+    this.$resultTable = this.$container.querySelector('.lotto-result-table');
+    this.$replayButton = this.$container.querySelector('.lotto-replay');
+  }
+
+  initEvent() {
+    eventHandler.on_결과확인(lottoNumber => {
+      this.lottoNumber = lottoNumber;
+      this.render();
+      this.show();
+    });
+
+    eventHandler.on_로또번호표생성(lottoList => {
+      this.lottoList = lottoList;
+    });
+
+    eventHandler.on_다시시작(() => {
+      this.reset();
+    });
+
+    this.$closeButton.addEventListener('click', () => {
+      this.hide();
+    });
+
+    this.$replayButton.addEventListener('click', () => {
+      eventHandler.emit_다시시작();
+    });
+  }
+}
+
 const template = (lottoResult) => {
   const [win5, win4, win3, win2, win1] = lottoResult.winnerCounts;
   const { benefit } = lottoResult;
@@ -61,52 +108,5 @@ const template = (lottoResult) => {
 </div>
 `;
 };
-
-class LottoResultModal extends BaseElement {
-  lottoList;
-  lottoNumber;
-
-  $closeButton;
-  $replayButton;
-  $resultTable;
-
-  mounted() {
-    this.hide();
-  }
-
-  template() {
-    return template(new LottoResult(this.lottoNumber, this.lottoList));
-  }
-
-  initElement() {
-    this.$closeButton = this.$container.querySelector('.modal-close');
-    this.$resultTable = this.$container.querySelector('.lotto-result-table');
-    this.$replayButton = this.$container.querySelector('.lotto-replay');
-  }
-
-  initEvent() {
-    eventHandler.on_결과확인(lottoNumber => {
-      this.lottoNumber = lottoNumber;
-      this.render();
-      this.show();
-    });
-
-    eventHandler.on_로또번호표생성(lottoList => {
-      this.lottoList = lottoList;
-    });
-
-    eventHandler.on_다시시작(() => {
-      this.reset();
-    });
-
-    this.$closeButton.addEventListener('click', () => {
-      this.hide();
-    });
-
-    this.$replayButton.addEventListener('click', () => {
-      eventHandler.emit_다시시작();
-    });
-  }
-}
 
 window.customElements.define('lotto-result-modal', LottoResultModal);
