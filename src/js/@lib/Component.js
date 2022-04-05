@@ -5,7 +5,6 @@ export class Component extends HTMLElement {
 
   connectedCallback() {
     this.initContainer();
-
     this.render();
     this.mounted();
   }
@@ -31,7 +30,7 @@ export class Component extends HTMLElement {
   }
 
   template() {
-    //
+    return '';
   }
 
   initElement() {
