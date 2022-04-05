@@ -12,7 +12,7 @@
   z-index: 2;
 }
 
-.modal.open {
+.modal {
   opacity: 1;
   visibility: visible;
 }
