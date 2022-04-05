@@ -1,6 +1,6 @@
 import { BaseElement } from '../@lib/BaseElement.js';
-import { EVENT } from '../Constant.js';
 import { validator } from '../domain/Validator.js';
+import { eventHandler } from '../domain/EventHandler.js';
 
 const template = `
 <form class='mt-5'>
@@ -41,15 +41,11 @@ class LottoPurchase extends BaseElement {
         return alert(e.message);
       }
 
-      window.dispatchEvent(new CustomEvent(EVENT.구매금액입력, {
-        detail: {
-          price,
-        },
-      }));
+      eventHandler.emit_구매금액입력(price);
     });
 
-    window.addEventListener(EVENT.다시시작, () => {
-      this.$input.value = 0;
+    eventHandler.on_다시시작(() => {
+      this.reset();
     });
   }
 }

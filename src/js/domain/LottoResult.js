@@ -12,7 +12,7 @@ export class LottoResult {
 
     this.lottoNumber = lottoNumber;
     this.lottoList = lottoList;
-    
+
     this.calculate();
   }
 

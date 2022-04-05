@@ -1,7 +1,7 @@
 import { BaseElement } from '../@lib/BaseElement.js';
-import { EVENT } from '../Constant.js';
 import { validator } from '../domain/Validator.js';
 import { LottoNumber } from '../domain/LottoNumber.js';
+import { eventHandler } from '../domain/EventHandler.js';
 
 const template = `
 <form class='mt-9'>
@@ -71,26 +71,22 @@ class LottoNumberInput extends BaseElement {
   }
 
   initEvent() {
-    window.addEventListener(EVENT.구매금액입력, () => {
-      this.show();
-    });
-
-    window.addEventListener(EVENT.다시시작, () => {
-      this.hide();
+    eventHandler.on_구매금액입력(this.show.bind(this));
+    eventHandler.on_다시시작(() => {
+      this.reset();
     });
 
     this.$openModalButton.addEventListener('click', () => {
       const lottoNumber = new LottoNumber(this.getLottoNumbers());
+      const lottoNumbers = lottoNumber.getValues();
 
       try {
-        validator.validateLottoNumber(lottoNumber.getValues());
+        validator.validateLottoNumber(lottoNumbers);
       } catch (e) {
         return alert(e.message);
       }
 
-      window.dispatchEvent(
-        new CustomEvent(EVENT.결과확인, { detail: { lottoNumber } }),
-      );
+      eventHandler.emit_결과확인(lottoNumber);
     });
   }
 

@@ -1,6 +1,6 @@
 import { BaseElement } from '../@lib/BaseElement.js';
-import { EVENT } from '../Constant.js';
 import { lotto } from '../domain/Lotto.js';
+import { eventHandler } from '../domain/EventHandler.js';
 
 const template = `
 <section class='mt-9' >
@@ -44,21 +44,19 @@ class LottoPurchaseResult extends BaseElement {
   }
 
   initEvent() {
-    window.addEventListener(EVENT.구매금액입력, ({ detail: { price } }) => {
+    eventHandler.on_구매금액입력(price => {
       this.lottoList = lotto.createList(price / 1000);
       this.$purchaseCount.innerHTML = this.lottoList.length;
+
       this.show();
       this.showSimple();
 
-      window.dispatchEvent(new CustomEvent(EVENT.로또번호표생성, {
-        detail: {
-          lottoList: [...this.lottoList],
-        },
-      }));
+      eventHandler.emit_로또번호표생성(this.lottoList);
     });
 
-    window.addEventListener(EVENT.다시시작, () => {
-      this.hide();
+    eventHandler.on_다시시작(() => {
+      this.detailMode = true;
+      this.reset();
     });
 
     this.$toggleButton.addEventListener('change', () => {
@@ -77,11 +75,7 @@ class LottoPurchaseResult extends BaseElement {
 
   showSimple() {
     this.$simpleContainer.classList.remove('hide');
-    this.$simpleContainer.innerHTML = `
-            ${this.lottoList
-      .map(() => `<span class='mx-1 text-4xl'>🎟️ </span>`)
-      .join('')} 
-        `;
+    this.$simpleContainer.innerHTML = `${this.lottoList.map(() => `<span class='mx-1 text-4xl'>🎟️ </span>`).join('')}`;
   }
 
   showDetail() {

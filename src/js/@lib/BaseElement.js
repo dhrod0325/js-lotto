@@ -7,7 +7,6 @@ export class BaseElement extends HTMLElement {
     this.initContainer();
 
     this.render();
-
     this.mounted();
   }
 
@@ -41,6 +40,11 @@ export class BaseElement extends HTMLElement {
 
   initEvent() {
     //
+  }
+
+  reset() {
+    this.render();
+    this.mounted();
   }
 
   show() {
