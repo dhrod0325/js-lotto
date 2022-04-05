@@ -3,23 +3,23 @@ import { validator } from '../domain/Validator.js';
 import { eventHandler } from '../domain/EventHandler.js';
 
 class LottoPurchase extends BaseElement {
-  $form;
-  $input;
+  $formElem;
+  $inputElem;
 
   template() {
     return template;
   }
 
   initElement() {
-    this.$form = this.$container.querySelector('form');
-    this.$input = this.$container.querySelector('input');
+    this.$formElem = this.$container.querySelector('form');
+    this.$inputElem = this.$container.querySelector('input');
   }
 
   initEvent() {
-    this.$form.addEventListener('submit', e => {
+    this.$formElem.addEventListener('submit', e => {
       e.preventDefault();
 
-      const price = this.$input.value;
+      const price = this.$inputElem.value;
 
       try {
         validator.validatePrice(price);

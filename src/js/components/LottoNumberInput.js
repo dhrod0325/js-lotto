@@ -4,9 +4,9 @@ import { LottoNumber } from '../domain/LottoNumber.js';
 import { eventHandler } from '../domain/EventHandler.js';
 
 class LottoNumberInput extends BaseElement {
-  $openModalButton;
-  $lottoNumbers;
-  $bonusNumber;
+  $openModalButtonElem;
+  $lottoNumberElems;
+  $bonusNumberElem;
 
   mounted() {
     this.hide();
@@ -17,9 +17,9 @@ class LottoNumberInput extends BaseElement {
   }
 
   initElement() {
-    this.$lottoNumbers = this.$container.querySelectorAll('.winning-number');
-    this.$openModalButton = this.$container.querySelector('.open-result-modal-button');
-    this.$bonusNumber = this.$container.querySelector('.bonus-number');
+    this.$lottoNumberElems = this.$container.querySelectorAll('.winning-number');
+    this.$openModalButtonElem = this.$container.querySelector('.open-result-modal-button');
+    this.$bonusNumberElem = this.$container.querySelector('.bonus-number');
   }
 
   initEvent() {
@@ -31,7 +31,7 @@ class LottoNumberInput extends BaseElement {
       this.reset();
     });
 
-    this.$openModalButton.addEventListener('click', () => {
+    this.$openModalButtonElem.addEventListener('click', () => {
       const lottoNumber = new LottoNumber(this.getInputNumbers(), this.getInputBonus());
       const numbersAndBonus = lottoNumber.getNumbersAndBonus();
 
@@ -46,13 +46,13 @@ class LottoNumberInput extends BaseElement {
   }
 
   getInputNumbers() {
-    return Array.from(this.$lottoNumbers)
+    return Array.from(this.$lottoNumberElems)
       .filter((elem) => +elem.value > 0)
       .map((elem) => +elem.value);
   }
 
   getInputBonus() {
-    return this.$bonusNumber.value;
+    return this.$bonusNumberElem.value;
   }
 }
 

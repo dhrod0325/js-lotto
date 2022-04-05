@@ -3,13 +3,13 @@ import { lotto } from '../domain/Lotto.js';
 import { eventHandler } from '../domain/EventHandler.js';
 
 class LottoPurchaseResult extends BaseElement {
-  detailMode = true;
   lottoList = [];
+  detailMode = true;
 
-  $simpleContainer;
-  $detailContainer;
-  $purchaseCount;
-  $toggleButton;
+  $simpleElem;
+  $detailElem;
+  $toggleButtonElem;
+  $purchaseCountElem;
 
   template() {
     return template;
@@ -21,16 +21,16 @@ class LottoPurchaseResult extends BaseElement {
   }
 
   initElement() {
-    this.$purchaseCount = this.$container.querySelector('.lotto-purchase-count');
-    this.$toggleButton = this.$container.querySelector('.lotto-numbers-toggle-button');
-    this.$simpleContainer = this.$container.querySelector('.simple');
-    this.$detailContainer = this.$container.querySelector('.detail');
+    this.$purchaseCountElem = this.$container.querySelector('.lotto-purchase-count');
+    this.$toggleButtonElem = this.$container.querySelector('.lotto-numbers-toggle-button');
+    this.$simpleElem = this.$container.querySelector('.simple');
+    this.$detailElem = this.$container.querySelector('.detail');
   }
 
   initEvent() {
     eventHandler.on_구매금액입력(price => {
       this.lottoList = lotto.createList(price / 1000);
-      this.$purchaseCount.innerHTML = this.lottoList.length;
+      this.$purchaseCountElem.innerHTML = this.lottoList.length;
 
       this.show();
       this.showSimple();
@@ -43,7 +43,7 @@ class LottoPurchaseResult extends BaseElement {
       this.reset();
     });
 
-    this.$toggleButton.addEventListener('change', () => {
+    this.$toggleButtonElem.addEventListener('change', () => {
       this.toggleDetail();
     });
   }
@@ -51,20 +51,20 @@ class LottoPurchaseResult extends BaseElement {
   toggleDetail() {
     this.detailMode = !this.detailMode;
 
-    this.$simpleContainer.classList.add('hide');
-    this.$detailContainer.classList.add('hide');
+    this.$simpleElem.classList.add('hide');
+    this.$detailElem.classList.add('hide');
 
     this.detailMode ? this.showDetail() : this.showSimple();
   }
 
   showSimple() {
-    this.$simpleContainer.classList.remove('hide');
-    this.$simpleContainer.innerHTML = `${this.lottoList.map(() => `<span class='mx-1 text-4xl'>🎟️ </span>`).join('')}`;
+    this.$simpleElem.classList.remove('hide');
+    this.$simpleElem.innerHTML = `${this.lottoList.map(() => `<span class='mx-1 text-4xl'>🎟️ </span>`).join('')}`;
   }
 
   showDetail() {
-    this.$detailContainer.classList.remove('hide');
-    this.$detailContainer.innerHTML = `
+    this.$detailElem.classList.remove('hide');
+    this.$detailElem.innerHTML = `
             <ul>
             ${this.lottoList.map((item) => `
               <li class='flex-auto'>

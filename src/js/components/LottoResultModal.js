@@ -6,9 +6,8 @@ class LottoResultModal extends BaseElement {
   lottoList;
   lottoNumber;
 
-  $closeButton;
-  $replayButton;
-  $resultTable;
+  $closeButtonElem;
+  $replayButtonElem;
 
   mounted() {
     this.hide();
@@ -19,9 +18,8 @@ class LottoResultModal extends BaseElement {
   }
 
   initElement() {
-    this.$closeButton = this.$container.querySelector('.modal-close');
-    this.$resultTable = this.$container.querySelector('.lotto-result-table');
-    this.$replayButton = this.$container.querySelector('.lotto-replay');
+    this.$closeButtonElem = this.$container.querySelector('.modal-close');
+    this.$replayButtonElem = this.$container.querySelector('.lotto-replay');
   }
 
   initEvent() {
@@ -39,11 +37,11 @@ class LottoResultModal extends BaseElement {
       this.reset();
     });
 
-    this.$closeButton.addEventListener('click', () => {
+    this.$closeButtonElem.addEventListener('click', () => {
       this.hide();
     });
 
-    this.$replayButton.addEventListener('click', () => {
+    this.$replayButtonElem.addEventListener('click', () => {
       eventHandler.emit_다시시작();
     });
   }
