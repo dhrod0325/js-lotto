@@ -1,6 +1,7 @@
 export class LottoResult {
   winnerCounts = [0, 0, 0, 0, 0];
   winnerPrices = [5000, 50000, 1500000, 30000000, 200000000];
+
   winnerPrice = 0;
   benefit = 0;
 
@@ -31,11 +32,9 @@ export class LottoResult {
 
   calcWinnerCounts(lotto) {
     const { numbers, bonus } = this.lottoNumber;
-
-    console.log(numbers, bonus);
     const winningCount = numbers.filter(number => lotto.includes(number)).length;
 
-    if (winningCount === 3) {
+     if (winningCount === 3) {
       this.winnerCounts[0]++;
     } else if (winningCount === 4) {
       this.winnerCounts[1]++;
