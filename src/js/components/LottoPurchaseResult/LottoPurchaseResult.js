@@ -73,7 +73,6 @@ class LottoPurchaseResult extends Component {
   onChangeState(state) {
     this.show();
     this.initLottoList(state.price);
-
     this.setPurchaseCount(this.lottoList.length);
     this.simpleView();
 
