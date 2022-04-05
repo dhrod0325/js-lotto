@@ -26,7 +26,6 @@ export class Component extends HTMLElement {
   }
 
   mounted() {
-    //
   }
 
   template() {
@@ -34,11 +33,9 @@ export class Component extends HTMLElement {
   }
 
   initElement() {
-    //
   }
 
   initEvent() {
-    //
   }
 
   reset() {
