@@ -1,5 +1,6 @@
 import { elem } from '../utils/Elem.js';
 import { store } from '../store/Store.js';
+import { app } from '../App.js';
 
 export class Component extends HTMLElement {
   $container;
@@ -10,6 +11,7 @@ export class Component extends HTMLElement {
     this.mounted();
 
     store.subscribe(this);
+    app.addComponent(this);
   }
 
   initContainer() {
@@ -52,5 +54,13 @@ export class Component extends HTMLElement {
 
   hide() {
     elem.hide(this.$container);
+  }
+
+  setState(state, context) {
+    store.setState(state, context);
+  }
+
+  restart() {
+    this.reset();
   }
 }

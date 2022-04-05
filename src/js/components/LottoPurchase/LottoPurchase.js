@@ -1,6 +1,5 @@
 import { Component } from '../../@lib/Component.js';
 import { validator } from '../../domain/LottoValidator.js';
-import { eventHandler } from '../../event/EventHandler.js';
 import { LottoPurchaseTemplate } from './LottoPurchase.template.js';
 import { store } from '../../store/Store.js';
 
@@ -30,10 +29,6 @@ class LottoPurchase extends Component {
       }
 
       store.setState({ price });
-    });
-
-    eventHandler.onRestart(() => {
-      this.reset();
     });
   }
 }

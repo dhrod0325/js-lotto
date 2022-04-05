@@ -1,7 +1,6 @@
 import { Component } from '../../@lib/Component.js';
 import { validator } from '../../domain/LottoValidator.js';
 import { LottoNumber } from '../../domain/LottoNumber.js';
-import { eventHandler } from '../../event/EventHandler.js';
 import { LottoNumberInputTemplate } from './LottoNumberInput.template.js';
 import { store } from '../../store/Store.js';
 
@@ -25,10 +24,6 @@ class LottoNumberInput extends Component {
   }
 
   initEvent() {
-    eventHandler.onRestart(() => {
-      this.reset();
-    });
-
     this.$openModalButtonElem.addEventListener('click', () => {
       const lottoNumber = new LottoNumber(this.getInputNumbers(), this.getInputBonus());
       const numbersAndBonus = lottoNumber.getNumbersAndBonus();
@@ -45,7 +40,7 @@ class LottoNumberInput extends Component {
 
   onChangeState(state) {
     if (!state.price) return;
-    
+
     this.show();
   }
 

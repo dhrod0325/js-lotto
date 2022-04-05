@@ -1,8 +1,8 @@
 import { Component } from '../../@lib/Component.js';
 import { LottoResult } from '../../domain/LottoResult.js';
-import { eventHandler } from '../../event/EventHandler.js';
 import { LottoResultModalTemplate } from './LottoResultModal.template.js';
 import { store } from '../../store/Store.js';
+import { app } from '../../App.js';
 
 class LottoResultModal extends Component {
   $closeButtonElem;
@@ -25,22 +25,18 @@ class LottoResultModal extends Component {
   }
 
   initEvent() {
-    eventHandler.onRestart(() => {
-      this.reset();
-    });
-
     this.$closeButtonElem.addEventListener('click', () => {
       this.hide();
     });
 
     this.$replayButtonElem.addEventListener('click', () => {
-      eventHandler.emitRestart();
+      app.restart();
     });
   }
 
   onChangeState(state) {
     if (!this.isRenderAble(state)) return;
-
+    
     this.render();
     this.show();
   }

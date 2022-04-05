@@ -25,6 +25,10 @@ export class Store {
     this.state = { ...this.state, ...newState };
     this.publish(context);
   }
+
+  clear() {
+    this.state = {};
+  }
 }
 
 export const store = new Store();

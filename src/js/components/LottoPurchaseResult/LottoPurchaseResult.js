@@ -1,6 +1,5 @@
 import { Component } from '../../@lib/Component.js';
 import { lotto } from '../../domain/Lotto.js';
-import { eventHandler } from '../../event/EventHandler.js';
 import { LottoPurchaseResultTemplate } from './LottoPurchaseResult.template.js';
 import { elem } from '../../utils/Elem.js';
 import { LOTTO } from '../../Constant.js';
@@ -32,11 +31,6 @@ class LottoPurchaseResult extends Component {
   }
 
   initEvent() {
-    eventHandler.onRestart(() => {
-      this.detailMode = true;
-      this.reset();
-    });
-
     this.$toggleButtonElem.addEventListener('change', () => {
       this.toggleView();
     });
@@ -85,6 +79,11 @@ class LottoPurchaseResult extends Component {
 
     const lottoList = this.lottoList;
     store.setState({ lottoList }, this);
+  }
+
+  restart() {
+    super.restart();
+    this.detailMode = true;
   }
 }
 
