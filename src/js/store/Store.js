@@ -13,7 +13,6 @@ export class Store {
   publish(context) {
     this.subscribers.forEach(subscriber => {
       if (context && subscriber === context) return;
-
       subscriber.onChangeState && subscriber.onChangeState(this.state);
     });
   }

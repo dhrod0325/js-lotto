@@ -45,6 +45,7 @@ class LottoNumberInput extends Component {
 
   onChangeState(state) {
     if (!state.price) return;
+    
     this.show();
   }
 
