@@ -26,3 +26,20 @@ body {
 .hide {
     display: none;
 }
+
+.detail li,
+.detail ul {
+    margin: 0;
+    padding: 0;
+}
+
+.detail li {
+    list-style: none;
+}
+
+.detail .lotto-number {
+    min-width: 40px;
+    display: inline-block;
+    text-align: center;
+    margin-right: 5px;
+}
