@@ -17,10 +17,6 @@ export class Store {
     });
   }
 
-  getState() {
-    return this.state;
-  }
-
   setState(newState, context) {
     this.state = { ...this.state, ...newState };
     this.publish(context);
