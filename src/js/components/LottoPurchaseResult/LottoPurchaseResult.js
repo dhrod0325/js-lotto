@@ -3,6 +3,7 @@ import { lotto } from '../../domain/Lotto.js';
 import { eventHandler } from '../../event/EventHandler.js';
 import { LottoPurchaseResultTemplate } from './LottoPurchaseResult.template.js';
 import { elem } from '../../utils/Elem.js';
+import { LOTTO } from '../../Constant.js';
 
 class LottoPurchaseResult extends Component {
   lottoList = [];
@@ -31,12 +32,10 @@ class LottoPurchaseResult extends Component {
 
   initEvent() {
     eventHandler.onInputPurchasePrice(price => {
-      this.lottoList = lotto.createList(price / 1000);
-      this.$purchaseCountElem.innerHTML = this.lottoList.length;
-
       this.show();
+      this.initLottoList(price);
+      this.setPurchaseCount(this.lottoList.length);
       this.simpleView();
-
       eventHandler.emitCreatedLottoList(this.lottoList);
     });
 
@@ -50,12 +49,14 @@ class LottoPurchaseResult extends Component {
     });
   }
 
+  initLottoList(price) {
+    this.lottoList = lotto.createList(price / LOTTO.UNIT);
+  }
+
   toggleView() {
     this.detailMode = !this.detailMode;
-
     elem.hide(this.$simpleElem);
     elem.hide(this.$detailElem);
-
     this.detailMode ? this.detailView() : this.simpleView();
   }
 
@@ -76,6 +77,10 @@ class LottoPurchaseResult extends Component {
           `).join('')}
             </ul> 
         `;
+  }
+
+  setPurchaseCount(count) {
+    this.$purchaseCountElem.innerHTML = count;
   }
 }
 
