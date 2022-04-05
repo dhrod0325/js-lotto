@@ -1,8 +1,8 @@
-import { BaseElement } from '../@lib/BaseElement.js';
+import { Component } from '../@lib/Component.js';
 import { lotto } from '../domain/Lotto.js';
 import { eventHandler } from '../domain/EventHandler.js';
 
-class LottoPurchaseResult extends BaseElement {
+class LottoPurchaseResult extends Component {
   lottoList = [];
   detailMode = true;
 

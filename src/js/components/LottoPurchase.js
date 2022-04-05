@@ -1,8 +1,8 @@
-import { BaseElement } from '../@lib/BaseElement.js';
+import { Component } from '../@lib/Component.js';
 import { validator } from '../domain/Validator.js';
 import { eventHandler } from '../domain/EventHandler.js';
 
-class LottoPurchase extends BaseElement {
+class LottoPurchase extends Component {
   $formElem;
   $inputElem;
 

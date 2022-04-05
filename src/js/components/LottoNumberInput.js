@@ -1,9 +1,9 @@
-import { BaseElement } from '../@lib/BaseElement.js';
+import { Component } from '../@lib/Component.js';
 import { validator } from '../domain/Validator.js';
 import { LottoNumber } from '../domain/LottoNumber.js';
 import { eventHandler } from '../domain/EventHandler.js';
 
-class LottoNumberInput extends BaseElement {
+class LottoNumberInput extends Component {
   $openModalButtonElem;
   $lottoNumberElems;
   $bonusNumberElem;

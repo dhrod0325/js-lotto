@@ -1,6 +1,6 @@
 import { createElement } from '../utils/utils.js';
 
-export class BaseElement extends HTMLElement {
+export class Component extends HTMLElement {
   $container;
 
   connectedCallback() {
