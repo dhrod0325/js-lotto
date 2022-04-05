@@ -75,8 +75,7 @@ class LottoResultModal extends BaseElement {
   }
 
   template() {
-    const lottoResult = new LottoResult(this.lottoNumber, this.lottoList);
-    return template(lottoResult);
+    return template(new LottoResult(this.lottoNumber, this.lottoList));
   }
 
   initElement() {
