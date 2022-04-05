@@ -18,7 +18,7 @@ class LottoPurchaseResult extends Component {
 
   mounted() {
     this.hide();
-    this.toggleDetail();
+    this.toggleView();
   }
 
   initElement() {
@@ -29,41 +29,41 @@ class LottoPurchaseResult extends Component {
   }
 
   initEvent() {
-    eventHandler.on_구매금액입력(price => {
+    eventHandler.onInputPurchasePrice(price => {
       this.lottoList = lotto.createList(price / 1000);
       this.$purchaseCountElem.innerHTML = this.lottoList.length;
 
       this.show();
-      this.showSimple();
+      this.simpleView();
 
-      eventHandler.emit_로또번호표생성(this.lottoList);
+      eventHandler.emitCreatedLottoList(this.lottoList);
     });
 
-    eventHandler.on_다시시작(() => {
+    eventHandler.onRestart(() => {
       this.detailMode = true;
       this.reset();
     });
 
     this.$toggleButtonElem.addEventListener('change', () => {
-      this.toggleDetail();
+      this.toggleView();
     });
   }
 
-  toggleDetail() {
+  toggleView() {
     this.detailMode = !this.detailMode;
 
     this.$simpleElem.classList.add('hide');
     this.$detailElem.classList.add('hide');
 
-    this.detailMode ? this.showDetail() : this.showSimple();
+    this.detailMode ? this.detailView() : this.simpleView();
   }
 
-  showSimple() {
+  simpleView() {
     this.$simpleElem.classList.remove('hide');
     this.$simpleElem.innerHTML = `${this.lottoList.map(() => `<span class='mx-1 text-4xl'>🎟️ </span>`).join('')}`;
   }
 
-  showDetail() {
+  detailView() {
     this.$detailElem.classList.remove('hide');
     this.$detailElem.innerHTML = `
             <ul>

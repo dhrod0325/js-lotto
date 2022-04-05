@@ -2,36 +2,36 @@ import { EventEmitter } from '../utils/EventEmitter.js';
 import { EVENT } from '../Constant.js';
 
 class EventHandler extends EventEmitter {
-  emit_로또번호표생성(lottoList) {
-    this.emit(EVENT.로또번호표생성, lottoList);
+  emitCreatedLottoList(lottoList) {
+    this.emit(EVENT.CreatedLottoList, lottoList);
   }
 
-  on_로또번호표생성(callback) {
-    this.on(EVENT.로또번호표생성, callback);
+  onCreatedLottoList(callback) {
+    this.on(EVENT.CreatedLottoList, callback);
   }
 
-  emit_결과확인(lottoNumber) {
-    this.emit(EVENT.결과확인, lottoNumber);
+  emitResultCheck(lottoNumber) {
+    this.emit(EVENT.ResultCheck, lottoNumber);
   }
 
-  on_결과확인(callback) {
-    this.on(EVENT.결과확인, callback);
+  onResultCheck(callback) {
+    this.on(EVENT.ResultCheck, callback);
   }
 
-  emit_구매금액입력(price) {
-    this.emit(EVENT.구매금액입력, price);
+  emitInputPurchasePrice(price) {
+    this.emit(EVENT.InputPurchasePrice, price);
   }
 
-  on_구매금액입력(callback) {
-    this.on(EVENT.구매금액입력, callback);
+  onInputPurchasePrice(callback) {
+    this.on(EVENT.InputPurchasePrice, callback);
   }
 
-  emit_다시시작() {
-    this.emit(EVENT.다시시작);
+  emitRestart() {
+    this.emit(EVENT.Restart);
   }
 
-  on_다시시작(callback) {
-    this.on(EVENT.다시시작, callback);
+  onRestart(callback) {
+    this.on(EVENT.Restart, callback);
   }
 }
 

@@ -28,10 +28,10 @@ class LottoPurchase extends Component {
         return alert(e.message);
       }
 
-      eventHandler.emit_구매금액입력(price);
+      eventHandler.emitInputPurchasePrice(price);
     });
 
-    eventHandler.on_다시시작(() => {
+    eventHandler.onRestart(() => {
       this.reset();
     });
   }

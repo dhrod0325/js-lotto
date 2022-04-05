@@ -24,11 +24,11 @@ class LottoNumberInput extends Component {
   }
 
   initEvent() {
-    eventHandler.on_구매금액입력(() => {
+    eventHandler.onInputPurchasePrice(() => {
       this.show();
     });
 
-    eventHandler.on_다시시작(() => {
+    eventHandler.onRestart(() => {
       this.reset();
     });
 
@@ -42,7 +42,7 @@ class LottoNumberInput extends Component {
         return alert(e.message);
       }
 
-      eventHandler.emit_결과확인(lottoNumber);
+      eventHandler.emitResultCheck(lottoNumber);
     });
   }
 

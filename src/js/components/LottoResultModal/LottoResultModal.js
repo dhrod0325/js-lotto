@@ -24,17 +24,17 @@ class LottoResultModal extends Component {
   }
 
   initEvent() {
-    eventHandler.on_결과확인(lottoNumber => {
+    eventHandler.onResultCheck(lottoNumber => {
       this.lottoNumber = lottoNumber;
       this.render();
       this.show();
     });
 
-    eventHandler.on_로또번호표생성(lottoList => {
+    eventHandler.onCreatedLottoList(lottoList => {
       this.lottoList = lottoList;
     });
 
-    eventHandler.on_다시시작(() => {
+    eventHandler.onRestart(() => {
       this.reset();
     });
 
@@ -43,7 +43,7 @@ class LottoResultModal extends Component {
     });
 
     this.$replayButtonElem.addEventListener('click', () => {
-      eventHandler.emit_다시시작();
+      eventHandler.emitRestart();
     });
   }
 }

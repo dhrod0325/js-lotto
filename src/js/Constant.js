@@ -1,8 +1,8 @@
 export const EVENT = Object.freeze({
-  구매금액입력: '구매금액입력',
-  다시시작: '다시시작',
-  결과확인: '결과확인',
-  로또번호표생성: '로또번호표생성',
+  InputPurchasePrice: '구매금액입력',
+  Restart: '다시시작',
+  ResultCheck: '결과확인',
+  CreatedLottoList: '로또번호표생성',
 });
 
 export const ERROR = Object.freeze({
