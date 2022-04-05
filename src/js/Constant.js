@@ -18,7 +18,7 @@ export const ERROR = Object.freeze({
 });
 
 export const LOTTO = {
-  MAX_LENGTH: 7,
+  VALID_LENGTH: 7,
   MIN_PRICE: 0,
   MAX_PRICE: 100000,
   UNIT: 1000,
