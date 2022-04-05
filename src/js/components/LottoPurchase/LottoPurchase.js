@@ -1,6 +1,6 @@
 import { Component } from '../../@lib/Component.js';
-import { validator } from '../../domain/Validator.js';
-import { eventHandler } from '../../domain/EventHandler.js';
+import { validator } from '../../domain/LottoValidator.js';
+import { eventHandler } from '../../event/EventHandler.js';
 import { LottoPurchaseTemplate } from './LottoPurchase.template.js';
 
 class LottoPurchase extends Component {

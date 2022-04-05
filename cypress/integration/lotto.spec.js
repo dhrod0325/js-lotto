@@ -1,4 +1,4 @@
-import { validator } from '../../src/js/domain/Validator.js';
+import { validator } from '../../src/js/domain/LottoValidator.js';
 import { lotto } from '../../src/js/domain/Lotto.js';
 import { ERROR } from '../../src/js/Constant.js';
 import { LottoResult } from '../../src/js/domain/LottoResult.js';

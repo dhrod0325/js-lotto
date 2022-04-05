@@ -1,4 +1,4 @@
-import { createElement } from '../utils/utils.js';
+import { elem } from '../utils/Elem.js';
 
 export class Component extends HTMLElement {
   $container;
@@ -10,7 +10,7 @@ export class Component extends HTMLElement {
   }
 
   initContainer() {
-    this.$container = createElement(`<div id='${this.constructor.name}'></div>`);
+    this.$container = elem.create(`<div id='${this.constructor.name}'></div>`);
     this.replaceWith(this.$container);
   }
 
@@ -18,8 +18,8 @@ export class Component extends HTMLElement {
     const template = this.template();
     if (!template) return;
 
-    this.removeAllChild();
-    this.$container.append(createElement(template));
+    elem.removeAllChild(this.$container);
+    this.$container.append(elem.create(template));
 
     this.initElement();
     this.initEvent();
@@ -44,20 +44,11 @@ export class Component extends HTMLElement {
   }
 
   show() {
-    this.$container.classList.remove('hide');
+    elem.show(this.$container);
   }
 
   hide() {
-    this.$container.classList.add('hide');
+    elem.hide(this.$container);
   }
 
-  removeAllChild() {
-    const removeAllChild = (parent) => {
-      while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-      }
-    };
-
-    removeAllChild(this.$container);
-  }
 }

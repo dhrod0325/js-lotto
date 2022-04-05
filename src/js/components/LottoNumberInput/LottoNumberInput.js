@@ -1,7 +1,7 @@
 import { Component } from '../../@lib/Component.js';
-import { validator } from '../../domain/Validator.js';
+import { validator } from '../../domain/LottoValidator.js';
 import { LottoNumber } from '../../domain/LottoNumber.js';
-import { eventHandler } from '../../domain/EventHandler.js';
+import { eventHandler } from '../../event/EventHandler.js';
 import { LottoNumberInputTemplate } from './LottoNumberInput.template.js';
 
 class LottoNumberInput extends Component {

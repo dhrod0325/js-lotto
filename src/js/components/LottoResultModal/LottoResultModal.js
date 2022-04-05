@@ -1,6 +1,6 @@
 import { Component } from '../../@lib/Component.js';
 import { LottoResult } from '../../domain/LottoResult.js';
-import { eventHandler } from '../../domain/EventHandler.js';
+import { eventHandler } from '../../event/EventHandler.js';
 import { LottoResultModalTemplate } from './LottoResultModal.template.js';
 
 class LottoResultModal extends Component {

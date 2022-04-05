@@ -1,6 +1,6 @@
 import { ERROR, LOTTO } from '../Constant.js';
 
-const Validator = () => {
+const LottoValidator = () => {
   const validatePrice = price => {
     if (!price)
       throw Error(ERROR.PRICE.REQUIRED);
@@ -30,4 +30,4 @@ const Validator = () => {
   };
 };
 
-export const validator = Validator();
+export const validator = LottoValidator();
