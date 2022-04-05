@@ -71,7 +71,10 @@ class LottoNumberInput extends BaseElement {
   }
 
   initEvent() {
-    eventHandler.on_구매금액입력(this.show.bind(this));
+    eventHandler.on_구매금액입력(() => {
+      this.show();
+    });
+    
     eventHandler.on_다시시작(() => {
       this.reset();
     });
