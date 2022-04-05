@@ -51,7 +51,7 @@ const template = `
   </form>
 `;
 
-class LottoWinningInput extends BaseElement {
+class LottoNumberInput extends BaseElement {
   $openModalButton;
   $lottoNumbers;
   $bonusNumber;
@@ -66,15 +66,17 @@ class LottoWinningInput extends BaseElement {
 
   initElement() {
     this.$lottoNumbers = this.$container.querySelectorAll('.winning-number');
-    this.$openModalButton = this.$container.querySelector(
-      '.open-result-modal-button',
-    );
+    this.$openModalButton = this.$container.querySelector('.open-result-modal-button');
     this.$bonusNumber = this.$container.querySelector('.bonus-number');
   }
 
   initEvent() {
-    window.addEventListener(EVENT.LottoPurchaseButtonClick, () => {
+    window.addEventListener(EVENT.구매금액입력, () => {
       this.show();
+    });
+
+    window.addEventListener(EVENT.다시시작, () => {
+      this.hide();
     });
 
     this.$openModalButton.addEventListener('click', () => {
@@ -87,12 +89,8 @@ class LottoWinningInput extends BaseElement {
       }
 
       window.dispatchEvent(
-        new CustomEvent('resultButtonClicked', { detail: { lottoNumber } }),
+        new CustomEvent(EVENT.결과확인, { detail: { lottoNumber } }),
       );
-    });
-
-    window.addEventListener('replay', () => {
-      this.hide();
     });
   }
 
@@ -107,4 +105,4 @@ class LottoWinningInput extends BaseElement {
   }
 }
 
-window.customElements.define('lotto-winning-input', LottoWinningInput);
+window.customElements.define('lotto-number-input', LottoNumberInput);

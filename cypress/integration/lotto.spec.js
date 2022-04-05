@@ -9,19 +9,19 @@ describe('Lotto 테스트', () => {
   });
 
   const $LottoPurchase = () => cy.get('#LottoPurchase');
-  const $LottoWinningInput = () => cy.get('#LottoWinningInput');
+  const $LottoNumberInput = () => cy.get('#LottoNumberInput');
   const $LottoPurchaseResult = () => cy.get('#LottoPurchaseResult');
 
   it('시작할때는 금액 입력 화면만 보여야 한다.', () => {
     $LottoPurchase().should('be.visible');
-    $LottoWinningInput().should('not.be.visible');
+    $LottoNumberInput().should('not.be.visible');
     $LottoPurchaseResult().should('not.be.visible');
   });
 
   it('금액을 입력하면 로또 구입 결과 화면이 나와야 한다.', () => {
     cy.inputPrice(3000);
 
-    $LottoWinningInput().should('be.visible');
+    $LottoNumberInput().should('be.visible');
     $LottoPurchaseResult().should('be.visible');
   });
 
@@ -82,7 +82,7 @@ describe('Validator 테스트', () => {
 
 describe('Lotto 번호 생성 테스트', () => {
   it('로또번호를 카운트에 맞춰 생성한다.', () => {
-    const list = lotto.createWithCount(5);
+    const list = lotto.createList(5);
     cy.wrap(list).should('have.length', 5);
   });
 });

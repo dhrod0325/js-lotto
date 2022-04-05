@@ -5,17 +5,17 @@
 
 .detail li,
 .detail ul {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .detail li {
-  list-style: none;
+    list-style: none;
 }
 
 .detail .lotto-number {
-  min-width: 40px;
-  display: inline-block;
-  text-align: center;
-  margin-right: 5px;
+    min-width: 40px;
+    display: inline-block;
+    text-align: center;
+    margin-right: 5px;
 }

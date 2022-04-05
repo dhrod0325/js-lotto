@@ -1,6 +1,9 @@
-export const EVENT = {
-  LottoPurchaseButtonClick: 'LottoPurchase.buttonClick',
-};
+export const EVENT = Object.freeze({
+  구매금액입력: '구매금액입력',
+  다시시작: '다시시작',
+  결과확인: '결과확인',
+  로또번호표생성: '로또번호표생성',
+});
 
 export const ERROR = Object.freeze({
   PRICE: {
@@ -13,3 +16,10 @@ export const ERROR = Object.freeze({
     INVALID_LENGTH: '로또 당첨번호는 7자리 입니다',
   },
 });
+
+export const LOTTO = {
+  MAX_LENGTH: 7,
+  MIN_PRICE: 0,
+  MAX_PRICE: 100000,
+  UNIT: 1000,
+};

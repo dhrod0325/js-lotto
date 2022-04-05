@@ -16,7 +16,7 @@ export class Lotto {
     return lotto;
   }
 
-  createWithCount(count) {
+  createList(createCount) {
     const result = [];
 
     const createNumbers = () => {
@@ -25,7 +25,7 @@ export class Lotto {
       return numbers;
     };
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < createCount; i++) {
       result.push(createNumbers());
     }
 

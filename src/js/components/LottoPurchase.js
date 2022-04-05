@@ -41,14 +41,14 @@ class LottoPurchase extends BaseElement {
         return alert(e.message);
       }
 
-      window.dispatchEvent(new CustomEvent(EVENT.LottoPurchaseButtonClick, {
+      window.dispatchEvent(new CustomEvent(EVENT.구매금액입력, {
         detail: {
           price,
         },
       }));
     });
 
-    window.addEventListener('replay', () => {
+    window.addEventListener(EVENT.다시시작, () => {
       this.$input.value = 0;
     });
   }

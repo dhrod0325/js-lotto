@@ -1,5 +1,6 @@
 import { BaseElement } from '../@lib/BaseElement.js';
 import { LottoResult } from '../domain/LottoResult.js';
+import { EVENT } from '../Constant.js';
 
 const template = (lottoResult) => {
   const [win5, win4, win3, win2, win1] = lottoResult.winnerCounts;
@@ -86,16 +87,18 @@ class LottoResultModal extends BaseElement {
   }
 
   initEvent() {
-    window.addEventListener('resultButtonClicked', ({ detail: { lottoNumber } }) => {
+    window.addEventListener(EVENT.결과확인, ({ detail: { lottoNumber } }) => {
       this.lottoNumber = lottoNumber;
-
       this.render();
-
       this.show();
     });
 
-    window.addEventListener('lottoCreated', ({ detail: { lottoList } }) => {
+    window.addEventListener(EVENT.로또번호표생성, ({ detail: { lottoList } }) => {
       this.lottoList = lottoList;
+    });
+
+    window.addEventListener(EVENT.다시시작, () => {
+      this.hide();
     });
 
     this.$closeButton.addEventListener('click', () => {
@@ -103,11 +106,7 @@ class LottoResultModal extends BaseElement {
     });
 
     this.$replayButton.addEventListener('click', () => {
-      window.dispatchEvent(new CustomEvent('replay'));
-    });
-
-    window.addEventListener('replay', () => {
-      this.hide();
+      window.dispatchEvent(new CustomEvent(EVENT.다시시작));
     });
   }
 }

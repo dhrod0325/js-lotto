@@ -44,25 +44,25 @@ class LottoPurchaseResult extends BaseElement {
   }
 
   initEvent() {
-    window.addEventListener(EVENT.LottoPurchaseButtonClick, ({ detail: { price } }) => {
-      this.lottoList = lotto.createWithCount(price / 1000);
+    window.addEventListener(EVENT.구매금액입력, ({ detail: { price } }) => {
+      this.lottoList = lotto.createList(price / 1000);
       this.$purchaseCount.innerHTML = this.lottoList.length;
       this.show();
       this.showSimple();
 
-      window.dispatchEvent(new CustomEvent('lottoCreated', {
+      window.dispatchEvent(new CustomEvent(EVENT.로또번호표생성, {
         detail: {
           lottoList: [...this.lottoList],
         },
       }));
     });
 
-    this.$toggleButton.addEventListener('change', () => {
-      this.toggleDetail();
+    window.addEventListener(EVENT.다시시작, () => {
+      this.hide();
     });
 
-    window.addEventListener('replay', () => {
-      this.hide();
+    this.$toggleButton.addEventListener('change', () => {
+      this.toggleDetail();
     });
   }
 
@@ -86,7 +86,6 @@ class LottoPurchaseResult extends BaseElement {
 
   showDetail() {
     this.$detailContainer.classList.remove('hide');
-
     this.$detailContainer.innerHTML = `
             <ul>
             ${this.lottoList.map((item) => `
