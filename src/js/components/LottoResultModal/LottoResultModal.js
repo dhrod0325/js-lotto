@@ -2,11 +2,9 @@ import { Component } from '../../@lib/Component.js';
 import { LottoResult } from '../../domain/LottoResult.js';
 import { eventHandler } from '../../event/EventHandler.js';
 import { LottoResultModalTemplate } from './LottoResultModal.template.js';
+import { store } from '../../store/Store.js';
 
 class LottoResultModal extends Component {
-  lottoList;
-  lottoNumber;
-
   $closeButtonElem;
   $replayButtonElem;
 
@@ -15,7 +13,10 @@ class LottoResultModal extends Component {
   }
 
   template() {
-    return LottoResultModalTemplate(new LottoResult(this.lottoNumber, this.lottoList));
+    if (!store.state) return;
+
+    const { lottoNumber, lottoList } = store.state;
+    return LottoResultModalTemplate(new LottoResult(lottoNumber, lottoList));
   }
 
   initElement() {
@@ -24,16 +25,6 @@ class LottoResultModal extends Component {
   }
 
   initEvent() {
-    eventHandler.onResultCheck(lottoNumber => {
-      this.lottoNumber = lottoNumber;
-      this.render();
-      this.show();
-    });
-
-    eventHandler.onCreatedLottoList(lottoList => {
-      this.lottoList = lottoList;
-    });
-
     eventHandler.onRestart(() => {
       this.reset();
     });
@@ -45,6 +36,17 @@ class LottoResultModal extends Component {
     this.$replayButtonElem.addEventListener('click', () => {
       eventHandler.emitRestart();
     });
+  }
+
+  onChangeState(state) {
+    if (!this.isRenderAble(state)) return;
+
+    this.render();
+    this.show();
+  }
+
+  isRenderAble(state) {
+    return state.lottoNumber && state.lottoList;
   }
 }
 

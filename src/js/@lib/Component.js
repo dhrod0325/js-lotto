@@ -1,4 +1,5 @@
 import { elem } from '../utils/Elem.js';
+import { store } from '../store/Store.js';
 
 export class Component extends HTMLElement {
   $container;
@@ -7,6 +8,8 @@ export class Component extends HTMLElement {
     this.initContainer();
     this.render();
     this.mounted();
+
+    store.subscribe(this);
   }
 
   initContainer() {
@@ -50,5 +53,4 @@ export class Component extends HTMLElement {
   hide() {
     elem.hide(this.$container);
   }
-
 }

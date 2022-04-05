@@ -4,6 +4,7 @@ import { eventHandler } from '../../event/EventHandler.js';
 import { LottoPurchaseResultTemplate } from './LottoPurchaseResult.template.js';
 import { elem } from '../../utils/Elem.js';
 import { LOTTO } from '../../Constant.js';
+import { store } from '../../store/Store.js';
 
 class LottoPurchaseResult extends Component {
   lottoList = [];
@@ -31,14 +32,6 @@ class LottoPurchaseResult extends Component {
   }
 
   initEvent() {
-    eventHandler.onInputPurchasePrice(price => {
-      this.show();
-      this.initLottoList(price);
-      this.setPurchaseCount(this.lottoList.length);
-      this.simpleView();
-      eventHandler.emitCreatedLottoList(this.lottoList);
-    });
-
     eventHandler.onRestart(() => {
       this.detailMode = true;
       this.reset();
@@ -81,6 +74,17 @@ class LottoPurchaseResult extends Component {
 
   setPurchaseCount(count) {
     this.$purchaseCountElem.innerHTML = count;
+  }
+
+  onChangeState(state) {
+    this.show();
+    this.initLottoList(state.price);
+
+    this.setPurchaseCount(this.lottoList.length);
+    this.simpleView();
+
+    const lottoList = this.lottoList;
+    store.setState({ lottoList }, this);
   }
 }
 
