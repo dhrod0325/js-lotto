@@ -1,8 +1,8 @@
 import { validator } from '../../src/js/domain/Validator.js';
 import { lotto } from '../../src/js/domain/Lotto.js';
 import { ERROR } from '../../src/js/Constant.js';
-import { LottoResult } from '../../src/js/domain/LottoResult';
-import { LottoNumber } from '../../src/js/domain/LottoNumber';
+import { LottoResult } from '../../src/js/domain/LottoResult.js';
+import { LottoNumber } from '../../src/js/domain/LottoNumber.js';
 
 describe('Lotto 테스트', () => {
   beforeEach(() => {

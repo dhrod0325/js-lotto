@@ -1,13 +1,14 @@
-import { Component } from '../@lib/Component.js';
-import { validator } from '../domain/Validator.js';
-import { eventHandler } from '../domain/EventHandler.js';
+import { Component } from '../../@lib/Component.js';
+import { validator } from '../../domain/Validator.js';
+import { eventHandler } from '../../domain/EventHandler.js';
+import { LottoPurchaseTemplate } from './LottoPurchase.template.js';
 
 class LottoPurchase extends Component {
   $formElem;
   $inputElem;
 
   template() {
-    return template;
+    return LottoPurchaseTemplate();
   }
 
   initElement() {
