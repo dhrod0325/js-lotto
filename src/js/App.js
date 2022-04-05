@@ -8,8 +8,8 @@ class App {
   }
 
   restart() {
-    this.components.forEach(component => component.restart());
     store.clear();
+    this.components.forEach(component => component.restart());
   }
 }
 

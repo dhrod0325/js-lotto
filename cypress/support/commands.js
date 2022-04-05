@@ -28,3 +28,14 @@ Cypress.Commands.add('inputPrice', amount => {
     cy.get('#LottoPurchase input').type(amount);
     cy.get('#LottoPurchase button').click();
 });
+
+Cypress.Commands.add('openModal', amount => {
+    cy.inputPrice(3000);
+
+    cy.get('.winning-number').each((element, idx) => {
+        cy.wrap(element).type(idx + 1);
+    });
+    cy.get('.bonus-number').type(7);
+    cy.get('.open-result-modal-button').first().click();
+    cy.get('.modal').should('be.visible');
+});

@@ -33,17 +33,20 @@ describe('Lotto 테스트', () => {
     $LottoPurchaseResult().get('.detail').should('be.visible');
   });
 
-  it('당첨번호를 입력하고 결과 확인하기를 누르면 모달이 열린다', () => {
-    cy.inputPrice(3000);
+  it('당첨번호를 입력하고 결과 확인하기를 누르면 모달기', () => {
+    cy.openModal();
 
-    cy.get('.winning-number').each((element, idx) => {
-      cy.wrap(element).type(idx + 1);
-    });
-    cy.get('.bonus-number').type(7);
-    cy.get('.open-result-modal-button').first().click();
-    cy.get('.modal').should('be.visible');
     cy.get('.modal-close').click();
     cy.get('.modal').should('not.be.visible');
+  });
+
+  it('다시하기 테스트', () => {
+    cy.openModal();
+
+    cy.get('.lotto-replay').click();
+
+    $LottoNumberInput().should('not.be.visible');
+    $LottoPurchaseResult().should('not.be.visible');
   });
 });
 
@@ -103,7 +106,6 @@ describe('Lotto 당첨 테스트', () => {
     const lottoResult = new LottoResult(lottoNumber,
       [[1, 2, 3, 4, 5, 8, 7]],
     );
-
     expect(lottoResult.winnerPrice).to.eq(30000000);
   });
 
@@ -113,5 +115,34 @@ describe('Lotto 당첨 테스트', () => {
     );
 
     expect(lottoResult.winnerPrice).to.eq(230000000);
+  });
+
+  it('3등테스트', () => {
+    const lottoResult = new LottoResult(lottoNumber,
+      [[1, 2, 3, 4, 5, 11, 12]],
+    );
+    expect(lottoResult.winnerPrice).to.eq(1500000);
+  });
+
+  it('4등테스트', () => {
+    const lottoResult = new LottoResult(lottoNumber,
+      [[1, 2, 3, 4, 10, 11, 12]],
+    );
+    expect(lottoResult.winnerPrice).to.eq(50000);
+  });
+
+  it('5등테스트', () => {
+    const lottoResult = new LottoResult(lottoNumber,
+      [[1, 2, 3, 9, 10, 11, 12]],
+    );
+    expect(lottoResult.winnerPrice).to.eq(5000);
+  });
+
+  it('꽝 테스트', () => {
+    const lottoResult = new LottoResult(lottoNumber,
+      [[8, 9, 10, 11, 12, 13, 14]],
+    );
+
+    expect(lottoResult.winnerPrice).to.eq(0);
   });
 });
